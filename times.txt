@@ -123,3 +123,7 @@
 "nus.py", "seqs-small.txt", 15, 64, 8.39493
 "nus.py", "seqs-small.txt", 16, 64, 7.76494
 "sw.py", "seqs.txt", 16, 1, 8.37901
+"sw.py", "seqs.txt", 4, 1, 13.0964
+"nus.py", "data/1k.in", 4, 1, 98.6377
+"nus.py", "data/sample.in", 4, 1, 0.007508
+"nus.py", "data/sample.in", 4, 1, 0.001485

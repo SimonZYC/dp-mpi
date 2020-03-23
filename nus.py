@@ -1,5 +1,6 @@
 # Dynamic programming routine definitions for the Nussinov algorithm
 # http://ultrastudio.org/en/Nussinov_algorithm
+from functools import reduce
 
 def load_input(args):
     input_f = open(args[0], 'r')
@@ -32,9 +33,7 @@ def compute_cell(i, j, table, seq):
     elif i_pos - 1 == j_pos:
         return 0
     else:
-        return reduce(max, [table[i, k_pos] + table[len(seq) - (k_pos + 1) - 1, j] \
-                                for k_pos in xrange(i_pos, j_pos)],
-                      table[i-1, j-1] + score_fn(seq[i_pos], seq[j_pos]))
+        return reduce(max, [table[i, k_pos] + table[len(seq) - (k_pos + 1) - 1, j] for k_pos in range(i_pos, j_pos)], table[i-1, j-1] + score_fn(seq[i_pos], seq[j_pos]))
 
 def write_output(args, table, data):
     output_f = open(args[1], 'w')

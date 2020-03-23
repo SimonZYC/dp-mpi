@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """This script implements a generic dynamic programming solver
    which distributes its workload over MPI."""
@@ -30,14 +30,14 @@ parser.add_option("-d", "--division", dest="division",
 (options, args) = parser.parse_args()
 
 if not options.program:
-    print "Please specify the program to run, option -p."
+    print("Please specify the program to run, option -p.")
     exit
 
 if not options.division:
-    print "Please specify the division parameter, option -d."
+    print("Please specify the division parameter, option -d.")
     exit
 
-execfile(options.program)
+exec(open(options.program).read())
 
 p = comm.Get_size()
 rank = comm.Get_rank()
@@ -69,7 +69,7 @@ def split_among(n, k):
        the first blocks."""
     widths = []
     (per_one, leftover) = divmod(n, k)
-    for i in xrange(k):
+    for i in range(k):
         if i < leftover:
             widths.append(per_one + 1)
         else:
@@ -94,8 +94,8 @@ for param in ["p", "rank", "d", "n_secs", "column_secs"]:
 
 
 # Main processing loop
-for c_sec in xrange(rank, n_secs, p):
-    for row in xrange(n):
+for c_sec in range(rank, n_secs, p):
+    for row in range(n):
 
         # FETCH PREVIOUS ENTRIES IN ROW
         if not c_sec == 0:
@@ -106,7 +106,7 @@ for c_sec in xrange(rank, n_secs, p):
             comm.Recv(table[row, start:end], source=source, tag=tag)
 
         # COMPUTE THE ENTRIES IN THE COLUMN SECTION
-        for col in xrange(column_secs[c_sec], column_secs[c_sec+1]):
+        for col in range(column_secs[c_sec], column_secs[c_sec+1]):
                 table[row,col] = compute_cell(row, col, table, data)
 
         # SEND THIS AND PREVIOUS SECTIONS IN ROW
